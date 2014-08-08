@@ -1,4 +1,4 @@
-function [recx,coef]=infer_inter_fista(dict,x,L,lambda,maxiter)
+function [recx,coef]=infer_inter_fista(dict,x,L,lambda,maxiter,shape)
 mx=size(dict,3);
 mv=size(dict,4);
 r=size(dict,1);
@@ -27,8 +27,7 @@ for k=1:maxiter
     end
     %residual
     rx=recx-x;
-    log10(norm(rx(:)-x(:),2));
-    
+    E=log10(norm(rx(:)-x(:),2));
     vold=v;
     %compute the gradient
     for j=1:mv
@@ -40,12 +39,15 @@ for k=1:maxiter
         %soft thresholing in FISTA
         v(:,:,j)=soft(cj,lambda/L);
         %reverse max pooling
-        v(:,:,j)=rev_max_pooling(v(:,:,j),[2,2]);
+        v(:,:,j)=rev_max_pooling(v(:,:,j),shape);
     end
     %udpate the auxiliary variables
     t(k+1)=(1+sqrt(1+4*t(k)^2))/2;
     u=v+(t(k)-1)/t(k+1)*(v-vold);
     
+end
+if E>3
+    warning('Failed to converge.');
 end
 coef=v;
 end

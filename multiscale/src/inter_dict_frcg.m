@@ -65,7 +65,10 @@ while k<maxiter
     p=-ndf+beta*df;
     k=k+1;
     recx=inter_recx(x,dict,v);
-    log(norm(recx(:)-x(:),2)^2);
+    E=log10(norm(recx(:)-x(:),2)^2);
+end
+if E>3
+    warning('Failed to converge');
 end
 newdict=dict;
 end
