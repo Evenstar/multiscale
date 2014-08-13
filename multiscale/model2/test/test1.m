@@ -1,0 +1,14 @@
+img=double(imread('../data/barbara.png'))/255;
+img=imresize(img,1/2);
+load('../pretrained/dict.mat');
+filter{1}=reshape(dict',[5,5,1,4]);
+load('../pretrained/dict16x25.mat');
+filter{2}=reshape(dict',[5,5,4,4]);
+%%
+p=cell(2,1);
+s=cell(2,1);
+%%
+x=inter_backward(u,p,s,filter,2)
+%%
+[v,p,s]=inter_udpate_p(img,p,s,filter,1);
+recx=inter_backward(v,p,s,filter,1);
