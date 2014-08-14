@@ -27,7 +27,7 @@ for k=1:maxiter
     end
     %residual
     rx=recx-x;
-    E=log10(norm(rx(:),2))
+    E=log10(norm(rx(:),2));
     vold=v;
     %compute the gradient
     for j=1:mv

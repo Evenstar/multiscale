@@ -32,8 +32,7 @@ function [newdict]=inter_dict_frcg(x,v,dict,maxiter)
             for j=1:mv
                 rp(:,:,i)=rp(:,:,i)+conv2(v(:,:,j),p(:,:,i,j),'valid');
             end
-        end
-        
+        end     
         sa=0;
         for i=1:mx
             vrx=rx(:,:,i);
@@ -67,9 +66,10 @@ while k<maxiter
     recx=inter_recx(x,dict,v);
     E=log10(norm(recx(:)-x(:),2));
 end
+newdict=dict;
 if E>3
     warning('Failed to converge');
 end
-newdict=dict;
+
 end
 
