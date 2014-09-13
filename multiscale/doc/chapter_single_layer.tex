@@ -183,7 +183,7 @@ Surprisingly, we found that, on many datasets, the filters learned contains exac
 
 What this phenomenon means is that: the filters that give rise to the sparsest representation of image signals happen to have only one low frequency filter, which coincides with the traditional wavelets we have been using successfully in the past two decades. Some classes of images, exhibit sparse representations in these basis or tight frames, some don't. Notably, the majority the class of photos we conceptually take as "natural images" always exhibit such a phenomenon.(We haven't yet seen counter examples, but  Conversely, exhibiting this phenomenon can be thought of as a characteristic of the so called "natural images". 
 
-
+\textbf{Phase Transition} The filters obtained from the model \eqref{model:m3} will behave differently when we vary the value of $\eta$ and $\lambda$. in particular, we know when $\eta$ and $\lambda$ go to $\infty$, we get filters that are visually similar to the traditional wavelets, however, when $\eta$ and $\lambda$ are above a threshold, the filters obtained become trivial filters, that is all filters become zero except for one, which becomes the identity. There is a sharp transition between the two regions. From a practical point view, having a phase transition is helpful in that we readily know if the model works or not, instead of compromising quality.
 
 
 
