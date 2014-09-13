@@ -1,14 +1,4 @@
-\documentclass[a4paper]{article}
-\usepackage{amsmath,amsfonts,amsthm}
-\usepackage{fullpage}
-\usepackage{color}
-\usepackage{graphicx}
-\begin{document}
 
-\newtheorem{lem}{Lemma}
-\newtheorem{prop}{Proposition}
-\renewcommand{\a}{\mathbf{a}}
-\renewcommand{\v}{\mathbf{v}}
 \section{Extension to Mulitple Layers}
 \subsection{Three Structures}
 In this section, we introduce ways to extend the previous construction of adaptive wavelet tight frames to multiple layers. In going from one layer to multiple layers, we consider three typical structures which are conveniently illustrated in the following Figure.
@@ -81,48 +71,3 @@ Similar to what did before, in the case where there is perturbation on the coeff
 There is a subtlety considering stacking intermediate layer to form a multi-scale structures. That is, the output to input relation cannot be linear, otherwise stacking multiple layers would just be equivalent as a one layer structure. The non-linearity in our model may possibly come from two sources: one is the nonlinear sampling procedure, the other is the thresholding in the encoding stage.
 
 Using \eqref{eq:m5} as a building block, we stack multiple layers together, we finally get the multi-scale structure depicted in Figure. The filters are all learned layer by layer, starting with the first one. Once the optimization has converged for the layer, we then move on to learn the next while keeping all filters in previous layers fixed.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\end{document}
