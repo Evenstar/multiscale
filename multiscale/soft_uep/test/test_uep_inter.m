@@ -1,15 +1,18 @@
 x=double(imread('../data/barbara.png'));
-x=x/255;
-x=imresize(x,1/4);
-a=randn(3,3,1,4);
-[r,~,mv]=size(a);
+y=x/255;
+x=[];
+x(:,:,1)=y(1:100,1:100);
+x(:,:,2)=y(200:299,200:299);
+a=randn(4,4,2,4);
+[r,~,mx,mv]=size(a);
 
-a=uep_inter_naive(x,a,50,3*1e-4);
+[a,recx,v]=uep_inter_naive(x,a,200,0);
+%%
 for i=1:4
     subplot(2,2,i);
-    imshow(a(:,:,i),[]);
+    imshow(a(:,:,2,i),[]);
 end
-
+%%
 
 x=double(imread('../data/barbara.png'));
 x=x/255;
@@ -23,3 +26,12 @@ for j=1:mv
 end
 psnr(x,recx)
 norm(v(:),1)
+%%
+k=1;
+for i=1:2
+    for j=1:4
+        E(k)=sum(sum(a(:,:,i,j)));
+        k=k+1;
+    end
+end
+sort(E)
