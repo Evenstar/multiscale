@@ -1,12 +1,14 @@
 \documentclass[a4paper]{article}
 \usepackage{amsmath,amsfonts,amsthm}
 \usepackage{fullpage}
+\usepackage{float}
 \usepackage{color}
 \usepackage{graphicx}
 \begin{document}
 
 \newtheorem{lem}{Lemma}
 \newtheorem{prop}{Proposition}
+\newtheorem{rem}{Remark}
 \renewcommand{\a}{\mathbf{a}}
 \renewcommand{\v}{\mathbf{v}}
 \title{Multiscale Adaptive Representation of Signals}
@@ -168,21 +170,44 @@ In some image processing tasks, such as pattern recognition, a small deviation f
 
 In this case, we can get an approximate solution to this model by penalty method, in fact, we have the following proposition:
 \begin{prop}
-Let $\{a^*\}_{i=1}^m$ be the minimizer of \eqref{model:m1}, let $\{\hat{a_i}\}_{i=1}^m$ be the solution to the following program:
+Let $\{a\}_{i=1}^m$ be the minimizer of \eqref{model:m0}, let $\{\hat{a}_i\}_{i=1}^m$ be the solution to the following program:
 \begin{equation}
 	\label{model:m2}
 	\begin{aligned}
-		&\min_{a_1,\cdots,a_m} \sum_{i=1}^m \|v_i\|_1 + \eta \|y-\sum_j a_j(-\cdot)*a_j*y\|_2 \\
+		&\min_{a_1,\cdots,a_m} \sum_{i=1}^m \|v_i\|_1 + \eta \sum_k (Tr(A^TA,k)-\delta_k)^2 \\
 		\textrm{subject to} \quad &v_i = a_i(-\cdot)*x,\quad i=1,\cdots,m
 	\end{aligned}
 \end{equation}
-where $y$ is Gaussian random variables of sufficient length. Then for appropriate choice of $\eta$, there exist a constant $c<<1$, such that 
-	\[
-	(1-c)\leq \sup_i \frac{\|a^*_i - \hat{a}_i\|_\infty}{\|a^*_i\|}\leq (1+c)
-	\]
-{\color{red} with high probability? or asymptotic results?}
+Then, for sufficient large $\eta$, we can correct $\hat{a}$ to be a solution $a^*$ such that the infeasibility of $a^* \sim \mathcal{O}(1/\lambda^2)$ and $\|v^*\|_1 \leq \|v\|_1 + \mathcal{O}(1/\lambda)$.
 \end{prop}
-Optimization program \eqref{model:m2} is relatively easier to solve, we call it the sampling version of model \eqref{model:m1}. In practice, $\eta$ is chosen based on our tolerance of deviation from perfection reconstruction filters. By letting $\eta$ goes to $\infty$, we recover \eqref{model:m1}.  As numerical algorithms is not the focus of this paper, we omit the details of implementation here. A brief description of numerical algorithms is included in the appendix, numerical illustrations are reproducible through the MATLAB code online at [].
+\begin{proof}
+	For notation simplicity, concatenate $\{a\}_{i=1}^m$ to form a single vector $a$, and similarly for $\{\hat{a}\}_{i=1}^m$. Let $F(a):=\sum_{i}^{m} \|a_j(-\cdot)*x\|_1$ and $G(a):= \sum_k (Tr(A^TA,k)-\delta_k)^2 $. 
+	As $\hat{a}$ is minimizer of \eqref{model:m2}, $ F(a)+\eta G(a) \geq F(\hat{a}) + \eta G(\hat{a})$. But $G(a)=0, G(\hat{a})\geq 0$, hence $F(\hat{a})\leq F(a)$ and $G(\hat{a}) \leq \frac{1}{\eta} (F(a)-F(\hat{a}))$. Since $F(a)$ is bounded, $G(\hat{a}) \sim \mathcal{O}(1/\eta)$ as $\eta\rightarrow\infty$. Now we have a solution $\hat{a}$ with infeasibility $\mathcal{O}(1/\eta)$. we correct it as follows: for sufficient large $\eta$, $G(\hat{a}+e)=G(\hat{a})+\nabla G(\hat{a})e + o(\|e\|_2)$. As $G(a)$ is continuously differentiable, let $G(\hat{a})+\nabla G(\hat{a})e =0$, we have $e=-(\nabla G(\hat{a}))^{\dagger} G(\hat{a})$ where the $\dagger$ means Moore-Penrose Pseudo inverse, which gives a solution to the linear equation with smallest $l_2$ norm. Let $\sigma_m$ be the smallest singular value of $\nabla G(\hat{a})$, then because of our choice of $e$, we have $\|e\|_2 \sim \mathcal{O}(\frac{1}{\sigma_m \eta})$ and $G(\hat{a}+e)\sim \mathcal{O}(1/\eta^2)$. Define $a^*=\hat{a}+e$. Therefore, $\|v^*\|_1 - \|v\|_1 =\sum_{j=1}^m (\|a^*_j(-\cdot)*x\|-\|a_j(-\cdot)*x\|_1\leq \sum_{j=1}^m (\|a^*_j(-\cdot)*x\|-\|\hat{a}_j(-\cdot)*x\|_1\leq Cm\|e\|_1\leq C\sqrt{mr}\|e\|_2\leq C\frac{\sqrt{mr}}{\sigma_m\eta}$.
+	
+		\end{proof}
+
+\begin{rem}
+	For the sole purpose of getting nearly perfect reconstruction filters, the second term in the above model can be replaced by the following sample reconstruction error:
+\begin{equation}
+	\begin{aligned}
+		&\min_{a_1,\cdots,a_m} \sum_{i=1}^m \|v_i\|_1 + \eta \|y-\sum_i a_i*a_i(-\cdot)*y\|_2 \\
+		\textrm{subject to} \quad &v_i = a_i(-\cdot)*x,\quad i=1,\cdots,m
+	\end{aligned}
+\end{equation}
+where $y$ is a sufficient large signal with each entry sampled from, e.g., a normal distribution.
+\end{rem}
+Optimization program \eqref{model:m2} is relatively easier to solve, we call it the sampling version of model \eqref{model:m1}. In practice, $\eta$ is chosen based on our tolerance of deviation from perfection reconstruction filters. By letting $\eta$ goes to $\infty$, we recover \eqref{model:m1}.  An illustration of the filters obtained is shown in Figure 1.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{fig11.eps}
+  \includegraphics[width=0.5\textwidth]{fig12.eps}
+    \caption{An examples of learned filters and their Fourier spectrum.}
+    \label{fig:1}
+\end{figure}
+
+As numerical algorithms is not the focus of this paper, we omit the details of implementation here. A brief description of numerical algorithms is included in the appendix, numerical illustrations are reproducible through the MATLAB code online at []. 
+
+
 So far, the models are based on the premise that the signals can be written as a sparse linear combination of translational invariant wavelets. Even if the signal is really generated this way, inevitably there will be perturbations or noises added to the coefficients. Hence, it is helpful to consider a variant of model \eqref{model:m1}:
 \begin{equation}
 \label{model:m3}
@@ -212,14 +237,12 @@ A special case of this variant, when the support of $a_i$ is of size $r\times r$
 
 To this end, we have introduced the construction of adaptive wavelet tight frames for one layer. When plugged into applications, we found the filters learned are of high quality, the results produced are comparable to those obtained by the dictionary learning paradigm, numerical illustrations are given in a later section, this is more or less expected.  In addition, we observed some quite unexpected and intriguing phenomena that we would like to share with the readers.
 {\color{red} quadratic term needs to be verified}
-\subsection{Some Intriguing Observations}
+\subsection{An Intriguing Phenomenon}
 \textbf{A unique low frequency filter}. The most commonly used wavelets and wavelet tight frames constructed using MRA has only one low frequency filter. As a result, it enables a fast multi-level decomposition and reconstruction algorithm, the architecture is illustrated in Figure. However, the UEP does not distinguish between low frequency and high frequency filters, the concept of a unique low frequency  filter is more of mathematical considerations rather than practical need. Indeed, one need not be bounded by this restriction, and can use multiple low frequency filter. From a practitioner's point of view, as long as the filters provide sparse representations of the signal, we do not care much if there is one or multiple low frequency filters. Indeed, in proposing the previous models, we adopt this practitioner's point of view, hence no constraint on the number of low frequency filters is added in the models. One would expect the resulting filters would be of diverse frequencies.
 
 Surprisingly, we found that, on many datasets, the filters learned contains exactly one low frequency filter. That is, among the $m$ filters trained, one and only one of them sums up to $1$, the rest each sum up to $0$ or very close to $0$, no intermediate values are presented. This phenomenon is stable regardless of the value of $m$ and support size of the filters. We observed this phenomenon on many datasets, including the Yale-face dataset, caltech-101 dataset, the fingerprint dataset, and a large number of randomly chosen natural photos from the Internet. However, this phenomenon is not entirely universal, we observed multiple low frequency filters on the dataset mnist. Apparently, this phenomenon has to do with the characteristics of the particular class of images and reflects the structure of the function space of all "natural images".A natural question is: for what class of images, can we observe such a phenomenon?
 
 What this phenomenon means is that: the filters that give rise to the sparsest representation of image signals happen to have only one low frequency filter, which coincides with the traditional wavelets we have been using successfully in the past two decades. Some classes of images, exhibit sparse representations in these basis or tight frames, some don't. Notably, the majority the class of photos we conceptually take as "natural images" always exhibit such a phenomenon.(We haven't yet seen counter examples, but  Conversely, exhibiting this phenomenon can be thought of as a characteristic of the so called "natural images". 
-
-\textbf{Phase Transition} The filters obtained from the model \eqref{model:m3} will behave differently when we vary the value of $\eta$ and $\lambda$. in particular, we know when $\eta$ and $\lambda$ go to $\infty$, we get filters that are visually similar to the traditional wavelets, however, when $\eta$ and $\lambda$ are above a threshold, the filters obtained become trivial filters, that is all filters become zero except for one, which becomes the identity. There is a sharp transition between the two regions. From a practical point view, having a phase transition is helpful in that we readily know if the model works or not, instead of compromising quality.
 
 \section{Extension to Mulitple Layers}
 \subsection{Three Structures}
@@ -413,6 +436,9 @@ In this case, the filter $a_i$ can never satisfy the perfect reconstruction unle
 \begin{equation}
 	\min_{v_1,\cdots,v_m,a_1,\cdots,_m} \|y-\sum_j a_j*a_j(-\cdot)u_j\|_2^2 + \lambda \sum_j J(v_j)+\|v_j-a_j(-\cdot)*x\|_2^2
 \end{equation}
+
+\subsection{Connection with convoluvional neural network}
+The analysis based multi-scale structure resembles the deep convolutional neural networks even though we starts from a very different perspective, the wavelet tight frames. Despite the structure similarity, there are some striking difference between them. First, the convolutional neural network is a purely supervised learning machine, while the proposed model is unsupervised. Second, the proposed model is constructed with respect to the unitary extension principle, hence has the nearly perfect reconstruction property, whereas in deep convolutional neural networks, it is not clear how to reconstruct the input as much information is lost as we ascend the layers. In other words, the proposed model is a nearly lossless decomposition of the input signal, while the neural network is not.
 }
 
 

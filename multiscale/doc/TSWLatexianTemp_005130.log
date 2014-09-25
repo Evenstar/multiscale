@@ -3,8 +3,8 @@ entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/chengtai/Documents/work/multiscale/doc/TSWLatexianTemp_multiscale.tex
-(/Users/chengtai/Documents/work/multiscale/doc/TSWLatexianTemp_multiscale.tex
+**/Users/chengtai/Documents/work/multiscale/doc/TSWLatexianTemp_005130.tex
+(/Users/chengtai/Documents/work/multiscale/doc/TSWLatexianTemp_005130.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
@@ -134,8 +134,8 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 )
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
-) (./TSWLatexianTemp_multiscale.aux)
-\openout1 = `TSWLatexianTemp_multiscale.aux'.
+) (./TSWLatexianTemp_005130.aux)
+\openout1 = `TSWLatexianTemp_005130.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
@@ -208,9 +208,9 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Try loading font information for U+msb on input line 17.
  (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./TSWLatexianTemp_multiscale.toc)
+) (./TSWLatexianTemp_005130.toc)
 \tf@toc=\write3
-\openout3 = `TSWLatexianTemp_multiscale.toc'.
+\openout3 = `TSWLatexianTemp_005130.toc'.
 
  [1
 
@@ -269,17 +269,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 260--261
 
  []
 
-[8] [9] [10] [11] [12] [13] (./TSWLatexianTemp_multiscale.aux) ) 
+[8] [9] [10] [11] [12] [13] (./TSWLatexianTemp_005130.aux) ) 
 Here is how much of TeX's memory you used:
  2440 strings out of 493117
- 33462 string characters out of 6135433
+ 33418 string characters out of 6135433
  105862 words of memory out of 5000000
  5845 multiletter control sequences out of 15000+600000
  13037 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,11n,24p,1313b,255s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,11n,24p,1309b,255s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on TSWLatexianTemp_multiscale.pdf (13 pages, 448346 bytes).
+Output written on TSWLatexianTemp_005130.pdf (13 pages, 448346 bytes).
 PDF statistics:
  127 PDF objects out of 1000 (max. 8388607)
  87 compressed objects within 1 object stream
