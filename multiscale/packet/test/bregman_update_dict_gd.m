@@ -29,26 +29,25 @@ function [newdict]=bregman_update_dict_gd(x,a,v,b,d,eta,maxiter)
         rv=inter_recv(dict,x)+b-v;
         rx=inter_recx(dict,v)+d-x;
         for j=1:mv
-            df(:,:,j)=2*conv2(rv(:,:,j),rot90(x,2),'valid');
+            df(:,:,j)=2*conv2(rv(:,:,j),x,'valid');
             df(:,:,j)=df(:,:,j)+2*eta*conv2(rot90(v(:,:,j),2),rx,'valid');
         end
     end
 
 %test numerical derivative
-% h=1e-8;
-% D=zeros(size(a));
-% for i=1:r
-%     for l=1:r
-%         for k=1:mv
-%         E=a;
-%         F=a;
-%         E(i,l,k)=E(i,l,k)+h;
-%         F(i,l,k)=F(i,l,k)-h;
-%         D(i,l,k)=(loss(E)-loss(F))/2/h;
-%         end
-%     end
-% end
-
+h=1e-8;
+D=zeros(size(a));
+for i=1:r
+    for l=1:r
+        for k=1:mv
+        E=a;
+        F=a;
+        E(i,l,k)=E(i,l,k)+h;
+        F(i,l,k)=F(i,l,k)-h;
+        D(i,l,k)=(loss(E)-loss(F))/2/h;
+        end
+    end
+end
 k=0;
 while k<maxiter
     LOSS=log10(loss(a))
