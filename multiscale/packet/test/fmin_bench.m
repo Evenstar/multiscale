@@ -29,6 +29,6 @@ function [newdict,L]=fmin_bench(x,a,v,b,d,tau,eta,maxiter)
 options=optimset('maxiter',maxiter,'MaxFunEval',2000000);
 newdict=fminunc(@obj,a(:),options);
 newdict=reshape(newdict,[r,r,mv]);
-L=log10(obj(newdict))
+L=log10(obj(newdict));
 end
 

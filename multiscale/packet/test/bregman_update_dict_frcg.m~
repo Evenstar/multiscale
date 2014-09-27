@@ -1,15 +1,15 @@
-function [newdict,L]=bregman_update_dict_frcg(x,a,v,b,tau,eta,maxiter)
+function [newdict,L]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,maxiter)
+%this program updates the filters by solving the following program using
+%FRCG method:
+%min F(a):=\tau\sum_j{\|a_j(-\cdot)*x+b_j-v_j\|_2^2+\eta\|x-\sum_j a_j*v_j-d\|_2^2}
 k=0;
-df=inter_df(x,a,v,b);
+[df,rv,rx]=inter_df(x,a,v,b,d,tau,eta);
 p=-df;
 while k<maxiter
-    df=inter_df(x,a,v,b);
-    alpha=inter_alpha(x,a,v,p,b);
-    olda=a;
+    alpha=inter_alpha(x,v,p,tau,eta,rv,rx);
     a=a+alpha*p;
-    norm(a(:)-olda(:),2);
-    L(k+1)=log10(loss(x,a,v,b));
-    ndf=inter_df(x,a,v,b);
+    L(k+1)=log10(loss(x,a,v,b,d,tau,eta));
+    [ndf,rv,rx]=inter_df(x,a,v,b,d,tau,eta);
     beta=norm(ndf(:),2)^2/norm(df(:),2)^2;
     p=-ndf+beta*df;
     k=k+1;  
@@ -43,7 +43,7 @@ E2=norm(rx(:),2)^2;
 out=tau*E1+eta*E2;
 end
 
-function df=inter_df(x,a,v,b,d,tau,eta)
+function [df,rv,rx]=inter_df(x,a,v,b,d,tau,eta)
 [~,~,mv]=size(a);
 df=zeros(size(a));
 rv=inter_recv(x,a,v)+b-v;
@@ -54,11 +54,10 @@ for j=1:mv
 end
 end
 
-function alpha=inter_alpha(x,a,v,b,d,p,tau,eta)
+function alpha=inter_alpha(x,v,p,tau,eta,rv,rx)
 pv=inter_recv(x,p,v);
 px=inter_recx(x,p,v);
-rv=-(inter_recv(x,a,v)+b-v);
-sa=dot(pv(:),rv(:));
-sb=norm(pv(:),2)^2;
-alpha=sa/sb;
+sa=tau*dot(pv(:),rv(:))+eta*dot(px(:),rx(:));
+sb=tau*norm(pv(:),2)^2+eta*norm(px(:),2)^2;
+alpha=-sa/sb;
 end

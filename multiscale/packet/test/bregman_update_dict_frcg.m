@@ -1,15 +1,26 @@
-function [newdict,L]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,maxiter)
+function [newdict]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,maxiter)
+%this program updates the filters by solving the following program using
+%FRCG method:
+%min F(a):=\tau\sum_j{\|a_j(-\cdot)*x+b_j-v_j\|_2^2+\eta\|x-\sum_j a_j*v_j-d\|_2^2}
+
+%initialization
 k=0;
-df=inter_df(x,a,v,b,d,tau,eta);
+[df,rv,rx]=inter_df(x,a,v,b,d,tau,eta);
 p=-df;
+
 while k<maxiter
-    alpha=inter_alpha(x,a,v,b,d,p,tau,eta);
-    olda=a;
+    %compute optimal stepsize
+    alpha=inter_alpha(x,v,p,tau,eta,rv,rx);
+    %update a in direction p
     a=a+alpha*p;
-    norm(a(:)-olda(:),2);
-    L(k+1)=log10(loss(x,a,v,b,d,tau,eta));
-    ndf=inter_df(x,a,v,b,d,tau,eta);
+    %record value of loss function, for debug only
+    %L(k+1)=log10(loss(x,a,v,b,d,tau,eta));
+    
+    %compute the new gradient
+    [ndf,rv,rx]=inter_df(x,a,v,b,d,tau,eta);
+    %compute beta
     beta=norm(ndf(:),2)^2/norm(df(:),2)^2;
+    %generate a new search direction
     p=-ndf+beta*df;
     k=k+1;  
 end
@@ -42,7 +53,7 @@ E2=norm(rx(:),2)^2;
 out=tau*E1+eta*E2;
 end
 
-function df=inter_df(x,a,v,b,d,tau,eta)
+function [df,rv,rx]=inter_df(x,a,v,b,d,tau,eta)
 [~,~,mv]=size(a);
 df=zeros(size(a));
 rv=inter_recv(x,a,v)+b-v;
@@ -53,11 +64,9 @@ for j=1:mv
 end
 end
 
-function alpha=inter_alpha(x,a,v,b,d,p,tau,eta)
+function alpha=inter_alpha(x,v,p,tau,eta,rv,rx)
 pv=inter_recv(x,p,v);
 px=inter_recx(x,p,v);
-rv=inter_recv(x,a,v)+b-v;
-rx=inter_recx(x,a,v)+d-x;
 sa=tau*dot(pv(:),rv(:))+eta*dot(px(:),rx(:));
 sb=tau*norm(pv(:),2)^2+eta*norm(px(:),2)^2;
 alpha=-sa/sb;
