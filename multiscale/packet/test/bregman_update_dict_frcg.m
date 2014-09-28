@@ -14,8 +14,7 @@ while k<maxiter
     %update a in direction p
     a=a+alpha*p;
     %record value of loss function, for debug only
-    %L(k+1)=log10(loss(x,a,v,b,d,tau,eta));
-    
+    %L(k+1)=log10(loss(x,a,v,b,d,tau,eta));    
     %compute the new gradient
     [ndf,rv,rx]=inter_df(x,a,v,b,d,tau,eta);
     %compute beta
@@ -53,6 +52,8 @@ E2=norm(rx(:),2)^2;
 out=tau*E1+eta*E2;
 end
 
+%this function computes the gradient, to save computation, [rx,rv] is also
+%returned to be used by function inter_alpha.
 function [df,rv,rx]=inter_df(x,a,v,b,d,tau,eta)
 [~,~,mv]=size(a);
 df=zeros(size(a));

@@ -13,21 +13,9 @@ tau=0;
 eta=10;
 %%
 tic
-[newdict,L]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,50);
+[newdict]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,50);
 toc
+tic
 [bdict,bL]=fmin_bench(x,a,v,b,d,tau,eta,2000);
+toc
 norm(newdict(:)-bdict(:),1)
-
-%%
-% a=randn(1,5);
-% x=randn(1,10);
-% v=randn(1,14);
-% F=@(a) norm(v-conv(fliplr(a),x),2)^2;
-% h=1e-8;
-% for i=1:5
-%     E=a;
-%     E(i)=E(i)+h;
-%     D(i)=(F(E)-F(a))/h;
-% end
-% D
-% 2*conv(fliplr(conv(fliplr(a),x)-v),x,'valid')
