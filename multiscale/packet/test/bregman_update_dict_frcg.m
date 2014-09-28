@@ -1,4 +1,4 @@
-function [newdict]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,maxiter)
+function [newdict,E]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,maxiter)
 %this program updates the filters by solving the following program using
 %FRCG method:
 %min F(a):=\tau\sum_j{\|a_j(-\cdot)*x+b_j-v_j\|_2^2+\eta\|x-\sum_j a_j*v_j-d\|_2^2}
@@ -14,7 +14,7 @@ while k<maxiter
     %update a in direction p
     a=a+alpha*p;
     %record value of loss function, for debug only
-    %L(k+1)=log10(loss(x,a,v,b,d,tau,eta));    
+    E(k+1)=log10(loss(x,a,v,b,d,tau,eta));    
     %compute the new gradient
     [ndf,rv,rx]=inter_df(x,a,v,b,d,tau,eta);
     %compute beta

@@ -16,7 +16,7 @@ L=50;
 %%
 x=double(imread('../data/barbara.png'))/255;
 x=imresize(x,1/4);
-a=randn(5,5,4);
+a=randn(5,5,4)/sqrt(sum(a(:).^2));
 [r,~,mv]=size(a);
 v=zeros(size(x,1)+r-1,size(x,2)+r-1,mv);
 v=inter_recv(x,a,v);
@@ -29,17 +29,26 @@ L=100;
 v=zeros(size(v));
 b=zeros(size(b));
 d=zeros(size(d));
-[v,E]=bregman_update_coef_fista(x,a,v,b,d,tau,eta,100,50);
-plot(E)
+%%
+L=20;
+[v,E]=bregman_update_coef_fista(x,a,v,b,d,tau,eta,L,5);
+[a,W]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,2);
+figure(1);
+subplot(2,1,1);
+plot(E);
+subplot(2,1,2);
+plot(W);
 %%
 v=zeros(size(v));
 b=zeros(size(b));
 d=zeros(size(d));
-%%
+a=randn(size(a));
+a=a/sqrt(sum(a(:).^2));
 tic
-for k=1:100
-v=bregman_update_coef_fista(x,a,v,b,d,tau,eta,L,5);
-a=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,20);
+for k=1:50
+    L=20;
+v=bregman_update_coef_fista(x,a,v,b,d,tau,eta,L,20);
+a=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,10);
 b=b+inter_recv(x,a,v)-v;
 d=d+inter_recx(x,a,v)-x;
 %norm(v(:),1)
@@ -47,3 +56,4 @@ d=d+inter_recx(x,a,v)-x;
 bregman_infeasibility_x(x,a,v)
 end
 toc
+bregman_infeasibility_lowfrequency(a)
