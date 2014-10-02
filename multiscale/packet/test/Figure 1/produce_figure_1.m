@@ -23,7 +23,7 @@ plot(I,psa(2:end),'-*r','LineWidth',1);
 xlabel('Compression Ratio');
 ylabel('PSNR')
 grid on
-legend('adaptive wavelet tight frame','wavelet tight frame generated from db3')
+legend('wavelet tight frame generated from db3','adaptive wavelet tight frame')
 set(gcf, 'PaperPositionMode', 'auto');
 print -depsc2 figure1.eps
 close;
