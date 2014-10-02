@@ -1,4 +1,4 @@
-function [coef,E]=bregman_update_coef_fista(x,a,v,b,d,tau,eta,L,maxiter)
+function [coef]=bregman_update_coef_fista(x,a,v,b,d,tau,eta,L,maxiter,tol)
 %this program computes the minimizer of the following minimization problem
 %using FISTA algorithm:
 %min_v \sum_j \|v_j\|_1+\tau\sum_j
@@ -9,8 +9,7 @@ u=v;
 t=ones(1,maxiter);
 while k<maxiter
     k=k+1;
-    E(k)=log10(obj(x,a,v,b,d,tau,eta));
-    
+    %E=obj(x,a,v,b,d,tau,eta);
     %compute gradient of f
     df=inter_df(x,a,u,b,d,tau,eta);
     vold=v;

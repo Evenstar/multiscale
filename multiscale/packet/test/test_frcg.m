@@ -15,6 +15,7 @@ eta=10;
 tic
 [newdict]=bregman_update_dict_frcg(x,a,v,b,d,tau,eta,50);
 toc
+%%
 tic
 [bdict,bL]=fmin_bench(x,a,v,b,d,tau,eta,2000);
 toc

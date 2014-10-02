@@ -9,7 +9,7 @@ H=zeros(n,numAtoms);
 for i=1:maxIter
     H=soft(W*X,1/lambda);
     [U,~,V]=svd(X*H');
-    W=V*eye(size(V,1),size(U,1))*U';    
+    W=V*eye(size(V,1),size(U,1))*U';
 end
 
 end
