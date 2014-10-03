@@ -7,22 +7,28 @@ v=zeros(size(x,1)+r-1,size(x,2)+r-1,mv);
         for j=1:mv
             v(:,:,j)=conv2(rot90(a(:,:,j),2),x);
         end
+        A=reshape(a,[r*r,mv]);
+        A=A';
         out=norm(v(:),1);
+        df=zeros(size(a));
+        for j=1:mv
+            df(:,:,j)=conv2(sign(v(:,:,j)),rot90(x,2),'valid');
+        end
     end
 
-
+    
     function [c,ceq]=nonlcon(a)
         a=reshape(a,[r,r,mv]);
         A=reshape(a,[r*r,mv]);
-        A=A';        
-        c=[sqrt(aw_uep_2d_c(A))-1e-8]
+        A=A';
+        c=[aw_uep_2d_c(A)-1e-9];
         ceq=[];
         for j=1:mv
             na=norm(a(:,:,j),'fro');
             c=[c; 1/mv-na];
         end
     end
-options=optimset('maxiter',maxiter,'MaxFunEvals',20000000, ...
+options=optimset('Display','iter','maxiter',maxiter,'MaxFunEvals',20000000, ...
     'Algorithm','Interior-Point','TolCon',1e-9);
 newdict = fmincon(@obj,a,[],[],[],[],[],[],@nonlcon,options);
 newdict = reshape(newdict,[r,r,mv]);

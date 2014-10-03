@@ -15,7 +15,7 @@ function pdict=fmin_proj_dict(x,a,v,maxiter)
         df=df(:);
     end
 obj(a)
-options=optimset('maxiter',maxiter,'MaxFunEval',2000000,'GradObj','off','TolX',1e-9);
+options=optimset('maxiter',maxiter,'MaxFunEval',2000000,'TolFun',1e-9);
 pdict=fminunc(@obj,a(:),options);
 pdict=reshape(pdict,[r,r,mv]);
 obj(pdict)
