@@ -1,0 +1,19 @@
+\contentsline {section}{\numberline {1}Overview of dictionary learning and wavelets}{2}
+\contentsline {section}{\numberline {2}Single Scale Adaptive Wavelet Tight Frames}{2}
+\contentsline {subsection}{\numberline {2.1}Wavelet Tight Frames}{3}
+\contentsline {subsection}{\numberline {2.2}Adaptive Construction}{4}
+\contentsline {subsection}{\numberline {2.3}An Intriguing Phenomenon}{6}
+\contentsline {subsection}{\numberline {2.4}Recover Predefined Wavelets}{7}
+\contentsline {section}{\numberline {3}Extension to Mulitple Layers}{7}
+\contentsline {subsection}{\numberline {3.1}Three Structures}{7}
+\contentsline {subsection}{\numberline {3.2}The Proposed Multi-scale Structure}{8}
+\contentsline {section}{\numberline {4}Numerical Illustrations}{9}
+\contentsline {subsection}{\numberline {4.1}Image Compression}{10}
+\contentsline {subsection}{\numberline {4.2}Image Denoising Examples}{10}
+\contentsline {subsection}{\numberline {4.3}classification}{12}
+\contentsline {section}{\numberline {5}Discussions}{13}
+\contentsline {subsection}{\numberline {5.1}Compare Dictionary Learning and Model A}{13}
+\contentsline {subsection}{\numberline {5.2}Connection with convoluvional neural network}{14}
+\contentsline {section}{\numberline {6}Conclusion}{15}
+\contentsline {section}{\numberline {7}Appendix}{15}
+\contentsline {subsection}{\numberline {7.1}Algorithm for Solving \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces 4\hbox {}\unskip \@@italiccorr )}}}{15}
