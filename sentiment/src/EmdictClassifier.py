@@ -1,5 +1,9 @@
 #coding=utf-8
 import re
+"""This class decides which class a given sentence belongs to based
+on the emotion icon dictionary. If the input sentence contains an icon that 
+is not in the dictionary, output None.
+"""
 class EmdictClassifier:
 	iconpattern=re.compile(r'(\[.+?\])')
 	sen=str()	
