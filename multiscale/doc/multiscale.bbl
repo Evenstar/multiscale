@@ -1,0 +1,76 @@
+\begin{thebibliography}{10}
+
+\bibitem{aharon2006svd}
+Michal Aharon, Michael Elad, and Alfred Bruckstein.
+\newblock -svd: An algorithm for designing overcomplete dictionaries for sparse
+  representation.
+\newblock {\em Signal Processing, IEEE Transactions on}, 54(11):4311--4322,
+  2006.
+
+\bibitem{benedetto2001wavelet}
+John~J Benedetto and Oliver~M Treiber.
+\newblock Wavelet frames: multiresolution analysis and extension principles.
+\newblock In {\em Wavelet transforms and time-frequency signal analysis}, pages
+  3--36. Springer, 2001.
+
+\bibitem{bryt2008compression}
+Ori Bryt and Michael Elad.
+\newblock Compression of facial images using the k-svd algorithm.
+\newblock {\em Journal of Visual Communication and Image Representation},
+  19(4):270--282, 2008.
+
+\bibitem{bryt2008improving}
+Ori Bryt and Michael Elad.
+\newblock Improving the k-svd facial image compression using a linear
+  deblocking method.
+\newblock In {\em Electrical and Electronics Engineers in Israel, 2008. IEEEI
+  2008. IEEE 25th Convention of}, pages 533--537. IEEE, 2008.
+
+\bibitem{candes2000curvelets}
+Emmanuel~J Candes and David~L Donoho.
+\newblock Curvelets: A surprisingly effective nonadaptive representation for
+  objects with edges.
+\newblock Technical report, DTIC Document, 2000.
+
+\bibitem{daubechies2003framelets}
+Ingrid Daubechies, Bin Han, Amos Ron, and Zuowei Shen.
+\newblock Framelets: Mra-based constructions of wavelet frames.
+\newblock {\em Applied and Computational Harmonic Analysis}, 14(1):1--46, 2003.
+
+\bibitem{do2002contourlets}
+Minh~N Do and Martin Vetterli.
+\newblock Contourlets: a new directional multiresolution image representation.
+\newblock In {\em Signals, Systems and Computers, 2002. Conference Record of
+  the Thirty-Sixth Asilomar Conference on}, volume~1, pages 497--501. IEEE,
+  2002.
+
+\bibitem{engan1999method}
+Kjersti Engan, Sven~Ole Aase, and J~Hakon~Husoy.
+\newblock Method of optimal directions for frame design.
+\newblock In {\em Acoustics, Speech, and Signal Processing, 1999. Proceedings.,
+  1999 IEEE International Conference on}, volume~5, pages 2443--2446. IEEE,
+  1999.
+
+\bibitem{goldstein2009split}
+Tom Goldstein and Stanley Osher.
+\newblock The split bregman method for l1-regularized problems.
+\newblock {\em SIAM Journal on Imaging Sciences}, 2(2):323--343, 2009.
+
+\bibitem{han2011adaptive}
+Bin Han, Gitta Kutyniok, and Zuowei Shen.
+\newblock Adaptive multiresolution analysis structures and shearlet systems.
+\newblock {\em SIAM Journal on Numerical Analysis}, 49(5):1921--1946, 2011.
+
+\bibitem{olshausen1996emergence}
+Bruno~A Olshausen et~al.
+\newblock Emergence of simple-cell receptive field properties by learning a
+  sparse code for natural images.
+\newblock {\em Nature}, 381(6583):607--609, 1996.
+
+\bibitem{shen2010wavelet}
+Zuowei Shen.
+\newblock Wavelet frames and image restorations.
+\newblock In {\em Proceedings of the International congress of Mathematicians},
+  volume~4, pages 2834--2863, 2010.
+
+\end{thebibliography}
