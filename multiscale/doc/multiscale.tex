@@ -4,6 +4,15 @@
 \usepackage{float}
 \usepackage{color}
 \usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{authblk}
+\usepackage{tikz-qtree}
+\usepackage{float}
+\title{Multiscale Adaptive Representation of Signals}
+\author[1]{Cheng Tai}
+\author[2]{Weinan E}
+\affil[1]{PACM, Princeton University}
+\affil[2]{Department of Mathematics and PACM, Princeton University}
 \begin{document}
 
 \newtheorem{lem}{Lemma}
@@ -12,11 +21,11 @@
 \newtheorem{thm}{Theorem}
 \renewcommand{\a}{\mathbf{a}}
 \renewcommand{\v}{\mathbf{v}}
-\title{Multiscale Adaptive Representation of Signals}
-\author{Cheng Tai}
+
 \date{}
 \maketitle
-\abstract{}
+\abstract{In this paper, we present a model that gives rise to multi-scale adaptive representations of the image signals. This representation improves over dictionary learning in two ways: first, the encoding efficiency is dramatically improved; second, it is a truly multi-scale representation. The proposed model is constructed by stacking several layers of units, where each unit is an adaptive wavelet tight frame. Numerical illustrations are also given to show the potential effectiveness of this new representation.}
+
 \section{Overview of dictionary learning and wavelets}
 It is now well acknowledged that sparse and overcomplete representations of data play a key role in many signal processing areas. The ability to represent a signal as a sparse linear combination of a few atoms from a possibly overcomplete dictionary lies in the heart of many applications of signal processing, examples include image/audio compression, denoising, and higher level tasks such as pattern recognition.
 
@@ -238,9 +247,11 @@ the solution of which is given explicitly:
 v_i = \mathcal{T}_{1/2\lambda}( a_i(-\cdot)*x),\quad i=1,\cdots,m
 \]
 where $\mathcal{T}: \mathbb{R}\mapsto \mathbb{R}$ is the soft-thresholding operator defined by
-\[
+\begin{equation}
+\label{eq:soft}
 \mathcal{T}_a(x)=\left\{ \begin{array}{lr}  (|x|-a)sign(x), &\textrm{ if } |x| > a \\0, &\textrm{otherwise}\end{array}\right . .
-\]
+\end{equation}
+
 When $\mathcal{T}$ operates on a vector, it operates on each component of the vector.
 
 
@@ -249,27 +260,30 @@ A special case of this variant, when the support of $a_i$ is of size $r\times r$
 To this end, we have introduced the construction of adaptive wavelet tight frames for one layer. When plugged into applications, the results produced are comparable to those obtained by the dictionary learning paradigm, some numerical illustrations are given in section 5. In addition, we observed a quite unexpected and intriguing phenomena that we would like to share with the readers.
 
 \subsection{An Intriguing Phenomenon}
-\textbf{A unique low frequency filter}. The most commonly used wavelets and wavelet tight frames constructed using MRA has only one low frequency filter by design. As a result, it enables a fast multi-level decomposition and reconstruction algorithms, to get a multi-level representation of the signal, we successively apply the same filters to the coefficients representing the low frequency information. This structure is illustrated in Figure 2a. On the other hand, as one can notice, the UEP does not distinguish between low frequency and high frequency filters, all the filters jointly satisfy an algebraic constraint. From this perspective, indeed, one can use multiple low frequency filter. The cost of doing so is increased computational cost, represented by multiple branching point in the tree diagram. So for the algorithm to be of practical use, especially when computational efficiency is a concern, it is better to maintain a unique low frequency filter. Taking this into consideration, one is attempted to add the following linear constraints to the previous model:
+\textbf{A unique low frequency filter}. The most commonly used wavelets and wavelet tight frames constructed using MRA has only one low frequency filter by design. As a result, it enables a fast multi-level decomposition and reconstruction algorithms, to get a multi-level representation of the signal, we successively apply the same filters to the coefficients representing the low frequency information. This structure is illustrated in Figure 2a. On the other hand, as one can notice, the UEP does not distinguish between low frequency and high frequency filters, all the filters jointly satisfy an algebraic constraint. From this perspective, indeed, one can use multiple low frequency filters at the cost of increased computational time. This is represented by multiple branching point in the tree diagram. So for the algorithm to be of practical use, especially when computational efficiency is a concern, it is better to maintain a unique low frequency filter. Taking this into consideration, one is attempted to add the following linear constraints to the previous model:
 \begin{equation}
 \label{eq:low}
 \sum_{i\in\mathbb{Z}^2} a_1(i)=1,\quad \sum_{i\in \mathbb{Z}^2} a_k(i)=0, k\in\{2,\cdots,m\}
 \end{equation}
 And if the above constraint is not incorporated, one would expect the resulting filters would be of diverse frequencies.
 
-Surprisingly, we found that, on many datasets, the filters learned contains exactly one low frequency filter even without the above constraint. That is, constraint \eqref{eq:low} is automatically satisfied!  Numerically, what this means is that when the filters are normalized to have unit $l_2$ norm, then $ |\sum_{i\in \mathbb{Z}^2} a_k(i)| < 10^{-4}, k\in\{2,\cdots,m\}$. This phenomenon is stable regardless of the number and support size of the filters. We observed this phenomenon on many datasets, including the Yale-face dataset, the Caltech-101 dataset, the Fingerprint dataset, and a large number of randomly chosen natural photos. However, this phenomenon is not entirely universal, we observed multiple low frequency filters on the dataset Mnist. Apparently, this phenomenon has to do with the characteristics of the particular class of images and reflects the structure of the function space of all "natural images" to some extent. A natural question is: for what class of signals, can we observe such a phenomenon?
+Surprisingly, we found that, on many datasets, the filters learned contains exactly one low frequency filter even without the above constraint. That is, constraint \eqref{eq:low} is automatically satisfied!  Numerically, what this means is that when the filters are normalized to have unit $l_2$ norm, then $ |\sum_{i\in \mathbb{Z}^2} a_k(i)| < 10^{-4}, k\in\{2,\cdots,m\}$. This phenomenon is relatively stable when we vary the number and support size of the filters. We observed this phenomenon on many datasets, including the "Extended Yale Face Dataset B"\cite{GeBeKr01}, the Caltech 101 dataset\cite{fei2007learning}, and a large number of randomly chosen natural photos. However, this phenomenon is not entirely universal, we observed multiple low frequency filters on the MNIST dataset\cite{lecun1998gradient}. 
 
 This phenomenon is assuring in that the filters produced by \eqref{model:m1} now has exactly the same form as the familiar wavelets and wavelet tight frames, hence can be used in the same way without any further troubles. 
 
-On the other hand, since this phenomenon is ubiquitous for natural photos, it tells us some partial information about the structure of the space of all "natural images", which traditional wavelets are known to compress very well. The coincidence that manually designed wavelet happen to agree with the adaptively learned filters with sparsity in mind partially explains the successful applications of compressing natural images using wavelets in the past two decades.
+On the other hand, since this phenomenon is ubiquitous for natural photos, it tells us some partial information about the structure of the space of all "natural images", which traditional wavelets are known to compress very well. The coincidence that manually designed wavelets happen to agree with the adaptively learned filters with sparsity in mind partially explains the successful applications of compressing natural images using wavelets in the past two decades.
 
 From a practical point of view, one can always first try to solve \eqref{model:m1} without the low frequency constraint, and see if there happen to be a unique low frequency filter, if so, then there is a good chance that one can replace the wavelets or wavelet tight frames with adaptive versions at no additional cost. If not, one may consider incorporating the constraint explicitly.
 
 \subsection{Recover Predefined Wavelets}
-As the proposed model is an adaptive version of the wavelet tight frame, it would be natural to ask when could we recover the wavelet filters. Numerically, we observe that if the signals are indeed generated using sparse linear combinations of the predefined wavelets, then the learned filters automatically recover the predefined wavelet filters. This is related to the exact recover problem in dictionary learning. There, the problem is suppose the data matrix $X$ is generated by linear combination of dictionary atoms $X=DC+\epsilon$, then ask under what conditions can we recover $D$ and $C$ simultaneously given the observations $X$? See [][] for two recent results in direction. In our case, the dictionary is of special form and cannot be explained by the results there.
+As the proposed model is an adaptive version of the wavelet tight frame, it would be natural to ask when could we recover the wavelet filters. Numerically, we observe that if the signals are indeed generated using sparse linear combinations of the predefined wavelets, then the learned filters automatically recover the predefined wavelet filters. This is related to the exact recover problem in dictionary learning. There, the problem is suppose the data matrix $X$ is generated by linear combination of dictionary atoms $X=DC+\epsilon$, then ask under what conditions can we recover $D$ and $C$ simultaneously given the observations $X$? See \cite{spielman2013exact,arora2013new} for two recent results in direction under some strict conditions. In our case, the dictionary is of special form and cannot be explained by the results there.
 
-In the numerical experiment, we generate the signals of Daubechies wavelets with different level of sparsity and learn the filters by solving \eqref{model:m1}. Measure of success is the wavelet filters are exactly recovered( within error $10^{-5}$), repeat each setting multiple times and record the ratio of success in the following table:
-\begin{center}
+In the numerical experiment, we generate the signals of Daubechies wavelets with different level of sparsity and learn the filters by solving \eqref{model:m1}. Measure of success is the wavelet filters are exactly recovered(the difference in $l_2$ norm is smaller than $10^{-5}$ ), repeat each setting multiple times and record the ratio of success in the following table:
+\begin{table}
+
+\centering
 \begin{tabular}{| c | c | c | c| c | c |}
+
 \hline
 Density & db2\_32 & db2\_64 & db3\_64 & db12\_64 & db24\_64 \\
 \hline
@@ -283,27 +297,31 @@ Density & db2\_32 & db2\_64 & db3\_64 & db12\_64 & db24\_64 \\
 \hline 
 0.5 & 0 & 0 & 0 & 0 & 0 \\
 \hline
+
 \end{tabular}
-\end{center}
+\caption{Ratio of successful recovery of predefined wavelets}
+\end{table}
 We note that if the signals indeed have a sparse representation in the wavelet domain, then the algorithm can successfully recover the wavelet filter. Above some threshold, however, the algorithm fails to recover the wavelet filters catastrophically. This is not surprising, after all the signals are no longer sparse in the wavelet domain. It's interesting to that there seems to be a phase transition between the success and failure regions.
 
 
 \section{Extension to Mulitple Layers}
 \subsection{Three Structures}
 In this section, we extend the previous construction of adaptive wavelet tight frames to multiple layers. Going from one layer to multiple layers, we consider three typical structures illustrated in the following Figure.
-\begin{center}
-\includegraphics[scale=0.4]{arch.jpg}
-\end{center}
+\begin{figure}[h!]
+\input{fig_tree}
+\label{fig:arch}
+\end{figure}
+
 
 The first structure is a $m$-ary tree which has at most one brunching point at each depth. This corresponds to the multi-level fast wavelet or wavelet tight frame transform. The root node represents the input image, (for illustration purpose, the input image has only one channel), applying $m$ filters on the input, we get $m$ sets of wavelet tight frame coefficients. Each set of coefficients is represented using $m$ child nodes. The left most node always represents the low frequency coefficients. To do multi-level transform, we successively apply the same filters on the low frequency coefficients. Thus, for a level $L$ wavelet tight frame transform, the structure we get a tree of depth $L+1$ . 
 
 This structure arises naturally in wavelet tight frames generated using MRA. The major advantage is the efficient decomposition and reconstruction algorithm. For level-$L$ transform with downsampling, it takes only $\mathcal O(mN)$ operations for the decomposition of a signal of length $N$. To apply structure, the existence of a single low frequency filter is assumed. We can extend the previous one layer construction to this structure if there happen to be one low frequency filter or is constrained to have only one low frequency filter.  This structure is mostly useful in image compression tasks, and the coefficients are critically down-sampled.
 
-The second structure is a full $m$-ary tree. Compared with the first architecture, instead of doing transforms on the low frequency coefficients only,  transforms are performed on the coefficients.  Apparently, the computational cost is now much larger. It is not appropriate for image compression or restoration tasks, but good for classification. Adaptation of the one layer model to this structure is straight forward. As the computational cost grows exponentially with the number of layers, we have to implement this structure with care and possibly some tricks in practice.  Examples of this structure include the scattering transform proposed by Mallat et.al. \\
+The second structure is a full $m$-ary tree. Compared with the first architecture, instead of doing transforms on the low frequency coefficients only,  transforms are performed on all the coefficients.  Apparently, the computational cost is now much larger. It is not appropriate for image compression tasks, but it is good for classification. An incarnation of this structure for classification is the scattering transform\cite{bruna2013invariant}. Adaptation of the one layer model to this structure is straight forward. As the computational cost grows exponentially with the number of layers, we have to implement this structure with care, and use some pruning procedures, for example, we can stop expanding the node if it has very small energy.
 
-The third structure resembles the convolutional neural networks. The first layer is still the same as the previous two, below that, the tree structure is replaced by a  locally connected  structure. This structure is more elaborate and requires some explanation which we give in the next subsection.
+The third structure resembles that of the convolutional neural networks. The first layer is still the same as the previous two, below that, the tree structure is replaced by a  locally connected  convolutional structure. This structure is more elaborate and requires some explanation which we give in the next subsection.
 
-\subsection{The Proposed Multi-scale Structure}
+\subsection{The Multi-scale Structure}
 The architecture consists an input layer and a few intermediate layers. The first layer is the same as the previous two structures. The intermediate layer accepts as input a few sets of coefficients produced by the previous layer, and produces another sets of output coefficients, not necessarily of the same size as the input. The input and output can be thought of as multi-channel images. The goal of the layer is still to produce sparse approximations of the input. Let $\{x_1,\cdots,x_m\}$ be the input coefficients, $\{v_1,\cdots,v_n\}$ be the output coefficients. The decomposition is defined as:
 \begin{equation}
 v_j = \sum_i a_{ij}(-\cdot)*x_i,\quad j=1,\cdots,n
@@ -356,29 +374,27 @@ Similar to what we did before, in the case where there is perturbation on the co
 &\sum_i \|y_i - \sum_j a_{ij}*u_j\|_2  \leq \delta\\
 \end{aligned}
 \end{equation}
-There is a subtlety considering stacking intermediate layer to form a multi-scale structures. That is, the output to input relation cannot be linear, otherwise stacking multiple layers would just be equivalent as a one layer structure. The non-linearity in our model may possibly come from two sources: one is the nonlinear sampling procedure, the other is the thresholding in the encoding stage.
+There is a subtlety considering stacking intermediate layer to form a multi-scale structures. That is, the output to input relation cannot be linear, otherwise the multiple layers would just contracts to one layer. The non-linearity in our model may come from two sources: one is the nonlinear sampling procedure, the other is the thresholding in the encoding stage.
 
-Using \eqref{eq:m5} as a building block, we stack multiple layers together, we finally get the multi-scale structure depicted in Figure 2. The filters are all learned in a  layer by layer fashion, starting with the first one. Once the optimization has converged for the layer, we then move on to learn the next while keeping all filters in previous layers fixed. 
+Using \eqref{eq:m5} as a building block, we stack multiple layers together, we finally get the multi-scale structure depicted in Figure \ref{fig:arch}c. The filters are all learned in a  layer by layer fashion, starting with the first one. Once the optimization has converged for the layer, we then move on to learn the next while keeping all filters in previous layers fixed. 
 
 \section{Numerical Illustrations}
-In this section, we provide examples for the possible applications of the representation developed in the previous sections. Examples in image compression, denoising, classification will be given. 
+The models discussed so far is merely a view point. The only way to tell if these models work in reality is to apply them. In this section, we provide examples for the possible applications of the representation developed in the previous sections to illustrate the effectiveness of the proposed representation. Examples in image compression, denoising, classification will be given. This section is meant for illustration purpose only.
 \subsection{Image Compression}
-The models discussed so far is merely a view point. The only way to tell if these models work in reality is to apply them. We consider in this subsection the problem of image compression. Compression using adaptive wavelet tight frames that induces sparsity seems to be a very natural approach. Nevertheless, developing a mature compression scheme that competes favorably with JPEG2000 is very hard, as in this method, the entropy coding stage has been perfected. It is not sufficient to provide only the representation stage, one must provide appealing entropy coding as well. Still, we can address a specific coding task, where the entropy coding stage becomes secondary. 
+ We consider the problem of image compression. Compression using adaptive wavelet tight frames that induces sparsity seems to be a very natural approach. Nevertheless, developing a mature compression scheme that competes favorably with JPEG2000 is very hard, as in this method, the entropy coding stage has been perfected. It is not sufficient to provide only the representation stage, one must provide appealing entropy coding as well. Still, we can address a specific coding task, where the entropy coding stage becomes secondary. 
 
-When we consider a narrow and specific class of images, the amount of redundancy increases, hence enabling a better compression performance, for this reason, we consider the fingerprint image dataset. Such image class is what wavelets became known for and is also important application wise.
-
-We compare two elementary compression schemes, one is predefined wavelet tight frames generated from Daubechies wavelets, db3, the other is the adaptive wavelet tight frame proposed in [], which has $4$ filters of size $6\times 6$ and is trained on the fingerprint dataset [].  Hence adaptive wavelet tight frame and the predefined wavelet tight frame has the same support size and the same total number of filters.  Given a tight frame and an image, we perform a 7-level transform, and keep only a fixed fraction of the largest coefficients in absolute value. The proportion of kept coefficients ranges from $1/2$ to $1/20$. Those coefficients are then used to reconstruct the image. We use PSNR(peak signal to noise ratio) to measure the quality of the compressed image. The result is shown in Figure \ref{fig:3}
+When we consider a narrow and specific class of images, the amount of redundancy increases, hence enabling a better compression performance. In particular, we can use a single image. We compare two elementary compression schemes, one is predefined wavelet tight frames generated from Daubechies wavelets, db3, the other is the adaptive wavelet tight frame, which has $4$ filters of size $6\times 6$ and is trained on the Barbara image \ref{fig:bar}.  Hence adaptive wavelet tight frame and the predefined wavelet tight frame has the same support size and the same total number of filters.  Given a tight frame and an image, we perform a 7-level transform, and keep only a fixed fraction of the largest coefficients in absolute value. The proportion of kept coefficients ranges from $1/2$ to $1/20$. Those coefficients are then used to reconstruct the image. We use PSNR(peak signal to noise ratio) to measure the quality of the compressed image. The result is shown in Figure \ref{fig:3}
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.4\textwidth]{figure51.eps}
     \caption{image compression illustration}
     \label{fig:3}
 \end{figure}
-The figures indicates the adaptively constructed tight frames is more effective in compressing the images. Training adaptive wavelet frames is also possible from a single image.
-\subsection{Image Denoising Examples}
-Images often contain noise, which may due to sensor imperfection, pool illumination, etc. Removing such noise is of benefit in many applications. Being perhaps the simplest possible inverse problem, it provides a convenient platform over which image processing ideas and techniques can be tested. Numerous contributions in the past few decades address this problem from many diverse point of view. The simplest of which is perhaps the wavelet domain thresholding.  It was originally proposed in [], later more sophisticated methods are developed and showed better performance such as the nonlocal means, BM3D, and the more recent ones based on dictionary learning ideas. 
+The figures indicates the adaptively constructed tight frames is more effective in compressing the images. 
+\subsection{Image Denoising}
+Images often contain noise, which may due to sensor imperfection, pool illumination, etc. Removing such noise is of benefit in many applications. Being perhaps the simplest possible inverse problem, it provides a convenient platform over which image processing ideas and techniques can be tested. Numerous contributions in the past few decades address this problem from many diverse point of view. The simplest of which is perhaps the wavelet domain thresholding. Later more sophisticated methods were developed and showed better performance such as the nonlocal means\cite{buades2005non}, BM3D\cite{dabov2007image}, and the more recent ones based on dictionary learning ideas\cite{elad2006image}. 
 
-We have no intention of providing a survey of this vast activity on image denoising in this subsection. Instead, for the same illustration purpose, we demonstrate the results of applying adaptive wavelet tight frames to this problem and compare it with a specific model of interest, the K-SVD model. As it is closely related to the proposed model and is shown to achieve state of the art results.
+We have no intention of providing a survey of this vast activity on image denoising in this subsection. Instead, for the same illustration purpose, we demonstrate the results of applying adaptive wavelet tight frames to this problem and compare it with a specific model of interest, the K-SVD model\cite{elad2006image}. As it is closely related to the proposed model and is shown to achieve state of the art results.
 
 We assume the image is corrupted by some additive noise. That is 
 \[
@@ -388,30 +404,32 @@ where $f$ is the clean image, $g$ is our observation, and $n$ is the noise with 
 \[
 \hat{g} :=W^T \mathcal{T}_{\lambda} (Wg)
 \]
-where $\mathcal{T}$ is the soft thresholding operator introduced in section []. $\lambda$ obviously depends on the noise level, but since we have no prior knowledge of the noise distribution, this value can only be chosen by experiments.Unlike image compression, in image denoising applications, we can afford using very redundant systems. The extra redundancy is proven to yield to produce better results than the critically sampled wavelet frames in practice. Therefore, we use relatively redundant systems in the three examples below.
+where $\mathcal{T}$ is the soft thresholding operator introduced in \eqref{eq:soft}. $\lambda$ obviously depends on the noise level, but since we have no prior knowledge of the noise distribution, this value can only be chosen by experiments.Unlike image compression, in image denoising applications, we can afford using very redundant systems. The extra redundancy is proven to yield better results than the critically sampled wavelet frames. Therefore, we use relatively redundant systems in the three examples below.
 
-In this first example, the input is single image normalized to $[0,1]$ and is corrupted with additive gaussian noise with $\sigma=0.1$. We train the filters both from the noisy image and clean image. The filter is of support size $6\times 6$ and we train $36$ of them .The result is in Figure [].  The PSNR shown is selected by grid search to produce best PSNR. It is not surprising that the filters learned from a clean image produces better quality image. The performance of K-SVD algorithms depends on the number and size of the atoms in the dictionary. Generally, the performance increases as we increase the number of atoms as long as the number is not too large. In this example, $256$ atoms with size $6\times 6$ is used.
+In this first example, the input is single image normalized to $[0,1]$ and is corrupted with additive gaussian noise with $\sigma=0.1$. We train the filters both from the noisy image and clean image. The filter is of support size $6\times 6$ and we train $36$ of them .The result is in Figure \ref{fig:bar}.  The PSNR shown is selected by grid search to produce best PSNR. It is not surprising that the filters learned from a clean image produces better quality image. The performance of K-SVD algorithms depends on the number and size of the atoms in the dictionary. Generally, the performance increases as we increase the number of atoms as long as the number is not too large. In this example, $256$ atoms with size $6\times 6$ is used.
 
 \begin{center}
+\label{fig:bar}
 \begin{tabular}{c c c c}
 \includegraphics[width=3cm]{./figures/4_1_noise.eps} & \includegraphics[width=3cm]{./figures/4_3_ksvd.eps}
 &\includegraphics[width=3cm]{./figures/4_4_tfnoise.eps} & \includegraphics[width=3cm]{./figures/4_5_tfclean.eps}\\
  noisy image ($\sigma=0.1$)& k-svd(28.65dB) &TF noise(28.8dB) & TF clean(29.3dB) 
 \end{tabular}
 \end{center}
-
-It seems the adaptive wavelet tight frames trained from clean is able to recover fine textures of the image, as shown in the images below.
+The adaptive wavelet tight frames trained from clean is able to recover fine textures of the image, as shown in Figure \ref{fig:detail}.
 \begin{center}
+\label{fig:detail}
 \begin{tabular}{c c c}
 \includegraphics[width=3cm]{./figures/4_7.eps} & \includegraphics[width=3cm]{./figures/4_8.eps} &\includegraphics[width=3cm]{./figures/4_6.eps}\\
 KSVD & TF noise & TF clean \\
 \end{tabular}
 \end{center}
-There is a natural scenario where training filters from clean images makes sense such as in the second example, there is a dataset of human face images, some of them are corrupted by noise. We would like to train the filters from the clean images and apply them to the noisy images. We test this idea on the Yale human dataset B. A glimpse of the dataset is in Figure[]. We also add additive gaussian noise with $\sigma=0.1$. For filters learned form noisy images, the average PSNR is 31.35dB, for filters learned from clean images, the PSNR improves to 32.07dB, and for K-SVD the average PSNR is 31.4dB.
+There is a natural scenario where training filters from clean images makes sense. Image there is a dataset of human face images, some of them are corrupted by noise. We would like to train the filters from the clean images and apply them to the noisy images. We test this idea on the extended Yale human face dataset B. A glimpse of the dataset is in Figure \ref{fig:yale}. We also add additive gaussian noise with $\sigma=0.1$. For filters learned form noisy images, the average PSNR is 31.35dB, for filters learned from clean images, the PSNR improves to 32.07dB, and for K-SVD the average PSNR is 31.4dB.
 \begin{center}
+\label{fig:yale}
 \includegraphics[width=6cm]{./figures/3_2.eps}
 \end{center}
-The third example is a natural image with unknown noise. Same as the previous two examples, we learn filters directly from the image. $\lambda$ is chosen to yield good visual. 
+The third example is natural images with unknown noise. The two images are collected form the Internet. Same as the previous two examples, we learn filters directly from the image. $\lambda$ is chosen to yield good visual. 
 
 \begin{center}
 \begin{tabular}{c c}
@@ -420,42 +438,50 @@ The third example is a natural image with unknown noise. Same as the previous tw
 \end{tabular}
 \end{center}
 
-\subsection{classification}
-In this experiment, we apply the representation obtained using the proposed model to examine its effectiveness on classification tasks. We choose to test on the MNIST handwritten digits dataest. It has 60000 training examples and 10000 test examples of digits 0-9. We adopt the third structure with two layers. Rectified linear activations are applied after the first layer. To do classification, we then send the output coefficients to a linear SVM.  Results with different number of filters are summarized in the following table.
+\subsection{Classification}
+The proposed model is aimed to produce sparse representations, it happens that sometimes sparse representations help classification tasks too. In this experiment, we apply the representation obtained using the proposed model to examine its effectiveness on classification tasks. We choose to test on the MNIST handwritten digits dataset. It has 70000 $28\times 28$ images of digits from 0 to 9, 60000 for training and 10000 for testing. We adopt the second and third structure with two layers. Rectified linear activations are applied after the first layer. To do classification, we then send the output coefficients to a linear SVM.  Results with different number of filters are summarized in the following table.
+\begin{center}
+\begin{tabular}{|c |c |c |c |c|}
+\hline
+MNIST & Raw pixel & $6$ filters $6\times 6$ & $12$ filters $6\times 6$& 2 layers \\
+\hline
+Precision & 94.0\% & 97? \% & 97\% & 99.0\% \\
+\hline
+\end{tabular}
+\end{center}
+As can be seen, there is a significant reduction in the error rates compared to raw pixel features. State-of-the-art results are obtained using convolutional neural networks and virtual SVM, the best reported result without expanding the training set is 0.53\%.
 
-As can be seen, there is a significant reduction in the error rates comapred to raw pixel features. State-of-the-art results are obtained using convolutional neural networks and virtual SVM, the best reported result without expanding the training set is 0.53\%.
 \section{Discussions}
-\subsection{Compare Dictionary Learning and Model A}
+\subsection{Compare Dictionary Learning and the Proposed One Layer Model}
 As we will see in this section, the dictionary learning models and model A share some similarities and have some differences. We make the following remarks: 
 
-\textbf{1. Model A is convolutional form of dictionary learning.} Consider the training procedure of dictionary learning, given an image or a set of images, we collect all $r\times r$ non-overlapping patches and form them into a data matrix $X$, then we solve the following minimization program:
+\textbf{1. Model \eqref{model:m0} is convolutional form of dictionary learning in the small $\lambda$ limit, with constraints}. Consider the training procedure of dictionary learning, given an image or a set of images, we collect all $r\times r$ non-overlapping patches and form them into a data matrix $X$, then we solve the following minimization program:
 \begin{equation}
 \min_{D,C} \|X-DC\|_2^2 + \lambda\|C\|_1.
 \end{equation}
-The underlying rationale is at some scale, say $r$, the image patch can be approximated by a sparse combination of some basis functions, where each column of $D$ represents a base function and each column of $C$ represents the combination coefficients for a particular patch.
-Consider model A in the one layer case, the objective function is 
+The underlying rationale is at some scale, say $r$, the image patch can be approximated by a sparse combination of some basis vector, where each column of $D$ represents a base vector and each column of $C$ represents the combination coefficients for a particular patch.
+Consider the proposed model \eqref{model:m0}. With some reorganization, this can be brought into a form that is very similar to dictionary learning. Let $X$ be the matrix formed by collecting all overlapping $r\times r$ images from an image, where each column of $X$ represents a vectorized image patch. Let $A=(vec(a_1),\cdots, vec(a_m))$, and $V$ is coefficient matrix which is reshaped conformally. Then \eqref{model:m0} is equivalent to the following model in the small $\lambda$ region.
 \begin{equation}
-\label{eq2}
-\min_{a_1,\cdots,a_m,v^{0}\cdots ,v^{m}} \|x-\sum_{i=1}^{m} a_i*v^{i}\|_2^2 +\lambda \sum_{i=1}^{m} \|v^{i}\|_1
+\begin{aligned}
+&\min_{A,V} \|X-AV\|_2^2+\lambda \|V\|_1. \\
+&\textrm{subject to}\quad V=W_a X
+\end{aligned}
 \end{equation}
-With some reorganization, this can be brought into a form that is very similar to dictionary learning. Let $X$ be the matrix formed by collecting all overlapping $r\times r$ images from an image, where each column of $X$ represents a vectorized image patch. Let $A=(vec(a_1),\cdots, vec(a_m))$, and $V$ is coefficient matrix which is reshaped conformally. Then the two terms in equation \eqref{eq2} are equivalent to :
-\begin{equation}
-\min_{A,V} \|X-AV\|_2^2+\lambda \|V\|_1.
-\end{equation}
-This is exactly the same form as dictionary learning except for that in dictionary learning, the $X$ is formed from non-overlapping patches while in model A, $X$ is formed from overlapping patches. If we accept the premise that image patches are translation invariant at a certain small scale, then convolutional models are a natural choice. In fact, for the purpose of finding local basis, we could form $X$ by sampling randomly uniformly from the image. It should not be hard to show when the sample size is large, the resulted basis converges to the one obtained by solving \eqref{eq2}. The way dictionary learning forms the matrix $X$ corresponds to uniform sampling from a special non-lapping grid, hence a proper subset of all $r\times r$ image patches, which is unnatural. There are subsequent works on dictionary learning forming matrix $X$ by collecting two or more sets of non-overlapping image patches, which is more close to the translation invariance assumption.
+The objective is of the same form as in dictionary learning except for that in dictionary learning, the $X$ is formed from non-overlapping patches while in the proposed model,  $X$ is formed from overlapping patches. If we accept the premise that image patches are translation invariant at a certain small scale, then overlapping patches is a natural choice. In fact, for the purpose of finding optimal local basis, we could form $X$ aggressively by sampling randomly uniformly from the image. When the sample size is large, the resulted basis converges to the one obtained by solving \eqref{model:m0}. The way dictionary learning forms the matrix $X$ corresponds to uniform sampling from a special non-lapping grid, which is more or less unnatural. 
 
-Despite the formal similarities, there are usually striking difference between the two models in practice. For example, In the practice of training dictionary learning models, people often use very large number of dictionary atoms(256 or more), where as in convolutional bases, we only use a small number of basis function(usually no more than 32). The patch based reconstruction results visually unpleasant block effect, which needs to be removed by post processing, while model A does not have such an issue.(But critically sampled model may or may not suffer from block effect depending on the support of the filter.)
+Besides, the big difference lies in the constraint. The dictionary learning problem is unconstrained, as a result, the coefficients obtained by solving sparse coding are supposed to be sparser, but the decay of the coefficients does not reflect the regularity of the signal being approximated. On the other hand, the coefficients obtained by the proposed model are normally less sparse, but the model takes into account the regularity of the signal and more importantly, is fast to compute.
 
-\textbf{2. Model A generalizes to multiple layers}. Being able to generalize to multiple layers of transform is crucial to a multi-scale representation. However, dictionary learning, in its original form, cannot achieve this objective. In dictionary learning, a dictionary is obtained and each image patch is associated with a few combination coefficients. As these coefficients are unordered and are of different length for different image patches, there is no obvious way how to continue learning the pattern of the coefficients in a similar "dictionary learning" fashion. In comparison, in model A, the coefficients associated with the image are still placed on a regular grid, which, after downsampling, are still of the same format as the input, which facilitates further learning in almost the same way. It is exactly this feature that allows model A to operates on multiple scales. 
+Despite the formal similarities, there are also some difference between the two models in practice. For example, In the practice of training dictionary learning models, people often use very large number of dictionary atoms(256 or more), whereas in convolutional bases, people only use a small number of basis function(usually no more than 32). The patch based reconstruction results visually unpleasant block effect, which needs to be removed by post processing, while the proposed model does not have such an issue.(But critically sampled model may suffer from block effect depending on the support of the filter.)
 
-\textbf{3. Computationally, the analysis based variant is favorable to dictionary learning}. When the parameters of both models are trained and to be used for inference, the computational costs are different. To infer the codes of a new incoming signal, dictionary learning performs a sparse coding, common procedures include matching pursuit, orthogonal matching pursuit and some path following algorithms, and they are of  different computational complexity. To solve model A in the synthesis formulation would require the same computation. However, there is an analysis based variant of model, which is far more efficient computationally in that it requires only a convolution plus a point-wise operation( such as thresholding). Compared with algorithms for solving sparse coding, there is a dramatic performance gain.
+\textbf{2. The proposed generalizes to multiple layers}. Being able to generalize to multiple layers of transform is crucial to a multi-scale representation. However, dictionary learning, in its original form, cannot achieve this objective. In dictionary learning, a dictionary is obtained and each image patch is associated with a few combination coefficients. As these coefficients are unordered and are of different length for different image patches, there is no obvious way how to continue learning the pattern of the coefficients in a similar "dictionary learning" fashion. In comparison, in the proposed one layer model, the coefficients associated with the image are still placed on a regular grid, which, after downsampling, are still of the same shape as the input, which facilitates further learning in almost the same way. It is exactly this feature that allows the proposed one layer model to extend to multiple scales. 
 
-\subsection{Connection with convoluvional neural network}
-The analysis based multi-scale structure resembles the deep convolutional neural networks even though we starts from a very different perspective, the wavelet tight frames. Despite the structure similarity, there are some striking difference between them. First, the convolutional neural network is a purely supervised learning machine, while the proposed model is unsupervised. Second, the proposed model is constructed with respect to the unitary extension principle, hence has the nearly perfect reconstruction property, whereas in deep convolutional neural networks, it is not clear how to reconstruct the input as much information is lost as we ascend the layers. In other words, the proposed model is a nearly lossless decomposition of the input signal, while the neural network is not.
-Studying the deeper connections between the analysis based multi-scale representations and the convolutional neural nets will be future direction.
+\textbf{3. Computationally, the proposed model is favorable to dictionary learning}. When the parameters of both models are trained and to be used for inference, the computational costs are different. To infer the codes of a new incoming signal, dictionary learning performs a sparse coding, common procedures include matching pursuit and orthogonal matching pursuit\cite{tropp2007signal}, they are of high computational complexity as demonstrated in the introduction. In comparison, in the proposed model, only some convolutions plus a point-wise operation( such as thresholding) are performed. This is a dramatic performance gain.
+
+\subsection{Connection with convolutional neural network}
+The analysis based multi-scale structure resembles the deep convolutional neural networks even though we starts from a very different perspective. But this similarity are merely formal,there are some striking difference between them. First, the convolutional neural network is a supervised learning machine, while the proposed model is unsupervised. Second, the proposed model is constructed with respect to the unitary extension principle, hence has the nearly perfect reconstruction property, whereas in deep convolutional neural networks, it is not clear how to reconstruct the input as much information is lost as we ascend the layers along with operations like max pooling and rectified linear units. The proposed model is a nearly lossless decomposition of the input signal(as long as the number of filters in the intermediate layers are above a threshold), while the neural network is not. Studying the deeper connections between the analysis based multi-scale representations and the convolutional neural nets will be a future direction.
 
 \section{Conclusion}
-In this paper, we proposed a novel model that serve as a multi-scale adaptive representations of image signals. This representation improves over dictionary learning in two ways: the first is encoding efficiency, and the second is a truly multi-scale architecture. Numerical illustrations are given to show the potential effectiveness of this new representation. In addition, the new representation has the property of being robust to translations and deformations. Interesting connections between the proposed model and dictionary learning as well as auto-encoders are established. We believe the proposed model can be an alternative to existing predefined wavelet tight frames and dictionary learning approach in some applications.
+In this paper, we proposed a novel model that serves as a multi-scale adaptive representations of image signals. This representation improves over dictionary learning in two ways: first, encoding efficiency is dramatically improved, second, it is truly multi-scale. The proposed model also raises some interesting questions such as how to explain the low frequency phenomenon? We hope that the proposed model can be an alternative to existing predefined wavelet tight frames and dictionary learning approach in some applications.
 \section{Appendix}
 \subsection{Numerical Algorithms}
 

@@ -1,0 +1,71 @@
+\begin{tabular}{l l l}
+\subfloat[][]{
+\begin{tikzpicture}[every tree node/.style={circle,fill=blue!80},
+level distance=1.25cm,sibling distance=.3cm, 
+edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}]
+\Tree [.\node {}; 
+[.\node{};
+[.\node{};
+[.\node{};][.\node{};][.\node{};]][.\node{};][.\node{};]
+]
+[.\node{};
+] 
+[.\node{};
+]]
+\end{tikzpicture}
+}
+&
+\subfloat[][]{\begin{tikzpicture}[every tree node/.style={circle,fill=blue!80,align=center,anchor=center},
+level distance=1.25cm,sibling distance=.3cm, 
+edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}]
+\Tree [.\node {}; 
+[.\node{};
+[.\node(A){};][.\node{};][.\node{};]
+]
+[.\node(B){};
+[.\node{};][.\node{};][.\node{};]
+] 
+[.\node{};
+[.\node{};][.\node{};][.\node{};]
+]]
+\end{tikzpicture}
+}
+&
+\subfloat[][]{
+  \begin{tikzpicture}[every tree node/.style={circle,fill=blue!80,align=center,anchor=center},
+level distance=1.25cm,sibling distance=1cm, 
+edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}]
+\Tree [.\node {}; 
+[.\node(A1){};
+[.\node(A2){};]
+]
+[.\node(B1){};
+[.\node(B2){};]
+] 
+[.\node(C1){};
+[.\node(C2){};]
+] 
+[.\node(D1){};
+[.\node(D2){};]
+]]
+\draw (A1)--(B2);
+\draw (A1)--(C2);
+\draw (A1)--(D2);
+\draw (B1)--(A2);
+\draw (B1)--(C2);
+\draw (B1)--(D2);
+\draw (C1)--(A2);
+\draw (C1)--(B2);
+\draw (C1)--(D2);
+\draw (D1)--(A2);
+\draw (D1)--(B2);
+\draw (D1)--(C2);
+
+\end{tikzpicture}
+}
+\end{tabular}
+\caption{three structures}
+
+
+
+
