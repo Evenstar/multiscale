@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  16 OCT 2014 10:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  17 OCT 2014 12:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**multiscale.tex -recorder
+**multiscale
 (./multiscale.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
@@ -616,13 +616,13 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 26.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 39.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 42.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 39.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 42.
  [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
@@ -635,14 +635,14 @@ Package epstopdf Info: Source file: <fig11.eps>
 (epstopdf)                    size: 37638 bytes
 (epstopdf)             Command: <repstopdf --outfile=fig11-eps-converted-to.pdf
  fig11.eps>
-(epstopdf)             \includegraphics on input line 236.
+(epstopdf)             \includegraphics on input line 221.
 Package epstopdf Info: Output file is already uptodate.
 
 <fig11-eps-converted-to.pdf, id=36, 439.6425pt x 92.345pt>
 File: fig11-eps-converted-to.pdf Graphic file (type pdf)
 
 <use fig11-eps-converted-to.pdf>
-Package pdftex.def Info: fig11-eps-converted-to.pdf used on input line 236.
+Package pdftex.def Info: fig11-eps-converted-to.pdf used on input line 221.
 (pdftex.def)             Requested size: 226.48395pt x 47.57158pt.
 Package epstopdf Info: Source file: <fig12.eps>
 (epstopdf)                    date: 2014-09-23 16:05:26
@@ -652,17 +652,24 @@ Package epstopdf Info: Source file: <fig12.eps>
 (epstopdf)                    size: 101460 bytes
 (epstopdf)             Command: <repstopdf --outfile=fig12-eps-converted-to.pdf
  fig12.eps>
-(epstopdf)             \includegraphics on input line 237.
+(epstopdf)             \includegraphics on input line 222.
 Package epstopdf Info: Output file is already uptodate.
 
 <fig12-eps-converted-to.pdf, id=37, 432.61626pt x 85.31876pt>
 File: fig12-eps-converted-to.pdf Graphic file (type pdf)
 
 <use fig12-eps-converted-to.pdf>
-Package pdftex.def Info: fig12-eps-converted-to.pdf used on input line 237.
+Package pdftex.def Info: fig12-eps-converted-to.pdf used on input line 222.
 (pdftex.def)             Requested size: 226.48395pt x 44.66672pt.
  [5 <./fig11-eps-converted-to.pdf> <./fig12-eps-converted-to.pdf>] (./fig_tree.
 tex) [6] [7] [8]
+
+Package caption Warning: \label without proper \caption on input line 411.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:bar' on page 9 undefined on input line 384.
+
 Package epstopdf Info: Source file: <figure51.eps>
 (epstopdf)                    date: 2014-10-03 10:25:01
 (epstopdf)                    size: 14431 bytes
@@ -671,16 +678,22 @@ Package epstopdf Info: Source file: <figure51.eps>
 (epstopdf)                    size: 10083 bytes
 (epstopdf)             Command: <repstopdf --outfile=figure51-eps-converted-to.
 pdf figure51.eps>
-(epstopdf)             \includegraphics on input line 389.
+(epstopdf)             \includegraphics on input line 387.
 Package epstopdf Info: Output file is already uptodate.
-
 <figure51-eps-converted-to.pdf, id=60, 477.785pt x 383.4325pt>
 File: figure51-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figure51-eps-converted-to.pdf>
-Package pdftex.def Info: figure51-eps-converted-to.pdf used on input line 389.
+Package pdftex.def Info: figure51-eps-converted-to.pdf used on input line 387.
 (pdftex.def)             Requested size: 181.18439pt x 145.40163pt.
  [9 <./figure51-eps-converted-to.pdf>]
+
+Package caption Warning: \label without proper \caption on input line 411.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:bar' on page 10 undefined on input line 407.
+
 Package epstopdf Info: Source file: <./figures/4_1_noise.eps>
 (epstopdf)                    date: 2014-04-13 16:23:12
 (epstopdf)                    size: 343234 bytes
@@ -689,15 +702,14 @@ Package epstopdf Info: Source file: <./figures/4_1_noise.eps>
 (epstopdf)                    size: 243310 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/4_1_noise-eps-co
 nverted-to.pdf ./figures/4_1_noise.eps>
-(epstopdf)             \includegraphics on input line 414.
+(epstopdf)             \includegraphics on input line 413.
 Package epstopdf Info: Output file is already uptodate.
-
 <./figures/4_1_noise-eps-converted-to.pdf, id=69, 517.935pt x 517.935pt>
 File: ./figures/4_1_noise-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/4_1_noise-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/4_1_noise-eps-converted-to.pdf used on input
- line 414.
+ line 413.
 (pdftex.def)             Requested size: 85.35826pt x 85.35284pt.
 Package epstopdf Info: Source file: <./figures/4_3_ksvd.eps>
 (epstopdf)                    date: 2014-04-13 16:19:45
@@ -707,7 +719,7 @@ Package epstopdf Info: Source file: <./figures/4_3_ksvd.eps>
 (epstopdf)                    size: 213752 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/4_3_ksvd-eps-con
 verted-to.pdf ./figures/4_3_ksvd.eps>
-(epstopdf)             \includegraphics on input line 414.
+(epstopdf)             \includegraphics on input line 413.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/4_3_ksvd-eps-converted-to.pdf, id=70, 517.935pt x 517.935pt>
@@ -715,7 +727,7 @@ File: ./figures/4_3_ksvd-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/4_3_ksvd-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/4_3_ksvd-eps-converted-to.pdf used on input 
-line 414.
+line 413.
 (pdftex.def)             Requested size: 85.35826pt x 85.35284pt.
 Package epstopdf Info: Source file: <./figures/4_4_tfnoise.eps>
 (epstopdf)                    date: 2014-04-13 16:18:26
@@ -726,7 +738,7 @@ Package epstopdf Info: Source file: <./figures/4_4_tfnoise.eps>
 (epstopdf)                    size: 228622 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/4_4_tfnoise-eps-
 converted-to.pdf ./figures/4_4_tfnoise.eps>
-(epstopdf)             \includegraphics on input line 415.
+(epstopdf)             \includegraphics on input line 414.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/4_4_tfnoise-eps-converted-to.pdf, id=71, 517.935pt x 517.935pt>
@@ -734,7 +746,7 @@ File: ./figures/4_4_tfnoise-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/4_4_tfnoise-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/4_4_tfnoise-eps-converted-to.pdf used on inp
-ut line 415.
+ut line 414.
 (pdftex.def)             Requested size: 85.35826pt x 85.35284pt.
 Package epstopdf Info: Source file: <./figures/4_5_tfclean.eps>
 (epstopdf)                    date: 2014-04-13 16:24:12
@@ -745,7 +757,7 @@ Package epstopdf Info: Source file: <./figures/4_5_tfclean.eps>
 (epstopdf)                    size: 230023 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/4_5_tfclean-eps-
 converted-to.pdf ./figures/4_5_tfclean.eps>
-(epstopdf)             \includegraphics on input line 415.
+(epstopdf)             \includegraphics on input line 414.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/4_5_tfclean-eps-converted-to.pdf, id=72, 517.935pt x 517.935pt>
@@ -753,8 +765,16 @@ File: ./figures/4_5_tfclean-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/4_5_tfclean-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/4_5_tfclean-eps-converted-to.pdf used on inp
-ut line 415.
+ut line 414.
 (pdftex.def)             Requested size: 85.35826pt x 85.35284pt.
+
+
+Package caption Warning: \label without proper \caption on input line 422.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:detail' on page 10 undefined on input line 419.
+
 Package epstopdf Info: Source file: <./figures/4_7.eps>
 (epstopdf)                    date: 2014-04-13 16:38:38
 (epstopdf)                    size: 46778 bytes
@@ -763,15 +783,14 @@ Package epstopdf Info: Source file: <./figures/4_7.eps>
 (epstopdf)                    size: 31070 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/4_7-eps-converte
 d-to.pdf ./figures/4_7.eps>
-(epstopdf)             \includegraphics on input line 423.
+(epstopdf)             \includegraphics on input line 424.
 Package epstopdf Info: Output file is already uptodate.
-
 <./figures/4_7-eps-converted-to.pdf, id=73, 154.5775pt x 205.76875pt>
 File: ./figures/4_7-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/4_7-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/4_7-eps-converted-to.pdf used on input line 
-423.
+424.
 (pdftex.def)             Requested size: 85.35826pt x 113.62842pt.
 Package epstopdf Info: Source file: <./figures/4_8.eps>
 (epstopdf)                    date: 2014-04-13 16:44:16
@@ -781,7 +800,7 @@ Package epstopdf Info: Source file: <./figures/4_8.eps>
 (epstopdf)                    size: 32513 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/4_8-eps-converte
 d-to.pdf ./figures/4_8.eps>
-(epstopdf)             \includegraphics on input line 423.
+(epstopdf)             \includegraphics on input line 424.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/4_8-eps-converted-to.pdf, id=74, 154.5775pt x 205.76875pt>
@@ -789,7 +808,7 @@ File: ./figures/4_8-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/4_8-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/4_8-eps-converted-to.pdf used on input line 
-423.
+424.
 (pdftex.def)             Requested size: 85.35826pt x 113.62842pt.
 Package epstopdf Info: Source file: <./figures/4_6.eps>
 (epstopdf)                    date: 2014-04-13 16:38:19
@@ -799,7 +818,7 @@ Package epstopdf Info: Source file: <./figures/4_6.eps>
 (epstopdf)                    size: 32190 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/4_6-eps-converte
 d-to.pdf ./figures/4_6.eps>
-(epstopdf)             \includegraphics on input line 423.
+(epstopdf)             \includegraphics on input line 424.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/4_6-eps-converted-to.pdf, id=75, 154.5775pt x 205.76875pt>
@@ -807,8 +826,20 @@ File: ./figures/4_6-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/4_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/4_6-eps-converted-to.pdf used on input line 
-423.
+424.
 (pdftex.def)             Requested size: 85.35826pt x 113.62842pt.
+
+
+Package caption Warning: \label without proper \caption on input line 445.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:yale' on page 10 undefined on input line 430.
+
+[10 <./figures/4_1_noise-eps-converted-to.pdf> <./figures/4_3_ksvd-eps-converte
+d-to.pdf> <./figures/4_4_tfnoise-eps-converted-to.pdf> <./figures/4_5_tfclean-e
+ps-converted-to.pdf> <./figures/4_7-eps-converted-to.pdf> <./figures/4_8-eps-co
+nverted-to.pdf> <./figures/4_6-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/3_2.eps>
 (epstopdf)                    date: 2014-04-13 14:23:20
 (epstopdf)                    size: 2082839 bytes
@@ -817,15 +848,15 @@ Package epstopdf Info: Source file: <./figures/3_2.eps>
 (epstopdf)                    size: 1323334 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/3_2-eps-converte
 d-to.pdf ./figures/3_2.eps>
-(epstopdf)             \includegraphics on input line 430.
+(epstopdf)             \includegraphics on input line 446.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/3_2-eps-converted-to.pdf, id=76, 1302.8675pt x 751.80875pt>
+<./figures/3_2-eps-converted-to.pdf, id=108, 1302.8675pt x 751.80875pt>
 File: ./figures/3_2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/3_2-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/3_2-eps-converted-to.pdf used on input line 
-430.
+446.
 (pdftex.def)             Requested size: 170.71652pt x 98.50716pt.
 Package epstopdf Info: Source file: <./figures/candle_noise.eps>
 (epstopdf)                    date: 2014-04-21 15:55:31
@@ -836,15 +867,15 @@ f>
 (epstopdf)                    size: 50583 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/candle_noise-eps
 -converted-to.pdf ./figures/candle_noise.eps>
-(epstopdf)             \includegraphics on input line 436.
+(epstopdf)             \includegraphics on input line 454.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/candle_noise-eps-converted-to.pdf, id=77, 276.03125pt x 285.065pt>
+<./figures/candle_noise-eps-converted-to.pdf, id=109, 276.03125pt x 285.065pt>
 File: ./figures/candle_noise-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/candle_noise-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/candle_noise-eps-converted-to.pdf used on in
-put line 436.
+put line 454.
 (pdftex.def)             Requested size: 113.81102pt x 117.53856pt.
 Package epstopdf Info: Source file: <./figures/candle_clean.eps>
 (epstopdf)                    date: 2014-04-21 15:55:55
@@ -855,15 +886,15 @@ f>
 (epstopdf)                    size: 21842 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/candle_clean-eps
 -converted-to.pdf ./figures/candle_clean.eps>
-(epstopdf)             \includegraphics on input line 436.
+(epstopdf)             \includegraphics on input line 454.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/candle_clean-eps-converted-to.pdf, id=78, 276.03125pt x 285.065pt>
+<./figures/candle_clean-eps-converted-to.pdf, id=110, 276.03125pt x 285.065pt>
 File: ./figures/candle_clean-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/candle_clean-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/candle_clean-eps-converted-to.pdf used on in
-put line 436.
+put line 454.
 (pdftex.def)             Requested size: 113.81102pt x 117.53856pt.
 Package epstopdf Info: Source file: <./figures/bird_noise.eps>
 (epstopdf)                    date: 2014-04-21 15:53:09
@@ -874,15 +905,15 @@ Package epstopdf Info: Source file: <./figures/bird_noise.eps>
 (epstopdf)                    size: 136408 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/bird_noise-eps-c
 onverted-to.pdf ./figures/bird_noise.eps>
-(epstopdf)             \includegraphics on input line 437.
+(epstopdf)             \includegraphics on input line 455.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/bird_noise-eps-converted-to.pdf, id=79, 305.14pt x 204.765pt>
+<./figures/bird_noise-eps-converted-to.pdf, id=111, 305.14pt x 204.765pt>
 File: ./figures/bird_noise-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/bird_noise-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/bird_noise-eps-converted-to.pdf used on inpu
-t line 437.
+t line 455.
 (pdftex.def)             Requested size: 113.81102pt x 76.37424pt.
 Package epstopdf Info: Source file: <./figures/bird_clean.eps>
 (epstopdf)                    date: 2014-04-21 15:53:23
@@ -893,60 +924,65 @@ Package epstopdf Info: Source file: <./figures/bird_clean.eps>
 (epstopdf)                    size: 23349 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/bird_clean-eps-c
 onverted-to.pdf ./figures/bird_clean.eps>
-(epstopdf)             \includegraphics on input line 437.
+(epstopdf)             \includegraphics on input line 455.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/bird_clean-eps-converted-to.pdf, id=80, 305.14pt x 204.765pt>
+<./figures/bird_clean-eps-converted-to.pdf, id=112, 305.14pt x 204.765pt>
 File: ./figures/bird_clean-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/bird_clean-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/bird_clean-eps-converted-to.pdf used on inpu
-t line 437.
+t line 455.
 (pdftex.def)             Requested size: 113.81102pt x 76.37424pt.
- [10 <./figures/4_1_noise-eps-converted-to.pdf> <./figures/4_3_ksvd-eps-convert
-ed-to.pdf> <./figures/4_4_tfnoise-eps-converted-to.pdf> <./figures/4_5_tfclean-
-eps-converted-to.pdf> <./figures/4_7-eps-converted-to.pdf> <./figures/4_8-eps-c
-onverted-to.pdf> <./figures/4_6-eps-converted-to.pdf> <./figures/3_2-eps-conver
-ted-to.pdf>]
-Overfull \hbox (9.0933pt too wide) in paragraph at lines 455--455
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[11 <./figures/3_2-eps-converted-to.pdf> <./figures/candle_noise-eps-converted-
+to.pdf> <./figures/candle_clean-eps-converted-to.pdf> <./figures/bird_noise-eps
+-converted-to.pdf> <./figures/bird_clean-eps-converted-to.pdf>]
+Overfull \hbox (9.0933pt too wide) in paragraph at lines 476--476
 []\OT1/cmr/bx/n/12 Compare Dic-tio-nary Learn-ing and the Pro-posed One Layer M
 odel 
  []
 
-[11 <./figures/candle_noise-eps-converted-to.pdf> <./figures/candle_clean-eps-c
-onverted-to.pdf> <./figures/bird_noise-eps-converted-to.pdf> <./figures/bird_cl
-ean-eps-converted-to.pdf>] [12] (./multiscale.bbl [13]) [14] (./multiscale.aux)
+[12] [13] (./multiscale.bbl [14]) [15] (./multiscale.aux)
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
  14254 strings out of 493117
  279465 string characters out of 6135433
- 347024 words of memory out of 5000000
+ 349109 words of memory out of 5000000
  17409 multiletter control sequences out of 15000+600000
  13393 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,20n,75p,1248b,1090s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,20n,75p,1236b,1090s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><
 /usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pf
-b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texl
-ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on multiscale.pdf (14 pages, 2924400 bytes).
+b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr
+/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
+/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
+2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on multiscale.pdf (15 pages, 2943419 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
- 131 compressed objects within 2 object streams
+ 259 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  88 words of extra memory for PDF output out of 10000 (max. 10000000)
 
