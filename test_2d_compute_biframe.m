@@ -1,0 +1,15 @@
+%%
+r=4;
+m=7;
+N=100;
+a=orth(randn(r*r,r*r));
+a=a(:,1:m);
+a=reshape(a,[r,r,m]);
+b=orth(randn(r*r,r*r));
+b=b(:,1:m);
+b=reshape(b,[r,r,m]);
+x=randn(N);
+b=fmin_seek_2d(x,a,b,100000);
+%%
+y=randn(N);
+awbft_2d_err(y,a,b)
